@@ -1,10 +1,16 @@
-library(MultiAssayExperiment)
-library(curatedTCGAData)
-library(TCGAutils)
-
 #'Script to download TCGA data into MultiAssayExperiment objects grouped by each disease code.
 #'Generates data_list.csv which contains a list of datasets, and filename for each MultiAssayExperiment objects.
 #'Used in TCGADataPipelines.
+
+library(BiocManager)
+if(!require("curatedTCGAData", quietly=TRUE)){
+  BiocManager::install("curatedTCGAData", ask=FALSE)
+}
+if(!require("TCGAutils", quietly=TRUE)){
+  BiocManager::install("TCGAutils", ask=FALSE)
+}
+library(curatedTCGAData)
+library(TCGAutils)
 
 #'Uses curatedTCGAData library to download MultiAssayExperiment object for 
 #'each disease type.
@@ -24,8 +30,8 @@ download <- function(outDir, diseaseCodes){
   return(filenames)
 }
 
-# out_dir <- "~/Documents/pfs/"
-out_dir <- "/pfs/out/"
+out_dir <- "~/Documents/pfs/"
+# out_dir <- "/pfs/out/"
 
 data('diseaseCodes', package = "TCGAutils")
 colnames(diseaseCodes) <- c("study", "available", "subtype_data", "study_name")
