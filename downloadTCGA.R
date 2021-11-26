@@ -30,8 +30,8 @@ download <- function(outDir, diseaseCodes){
   return(filenames)
 }
 
-out_dir <- "~/Documents/pfs/"
-# out_dir <- "/pfs/out/"
+# out_dir <- "~/Documents/pfs/"
+out_dir <- "/pfs/out/"
 
 data('diseaseCodes', package = "TCGAutils")
 colnames(diseaseCodes) <- c("study", "available", "subtype_data", "study_name")
