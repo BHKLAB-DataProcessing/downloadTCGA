@@ -23,19 +23,16 @@ download <- function(outDir, diseaseCodes){
     filename <- paste0("TCGA_", disease, ".rds")
     saveRDS(obj, paste0(outDir, filename))
     filenames <- c(filenames, filename)
-    if(disease == "BLCA"){
-      break
-    }
   }
   return(filenames)
 }
 
-out_dir <- "~/Documents/pfs/"
+# out_dir <- "~/Documents/pfs/"
 out_dir <- "/pfs/out/"
 
 data('diseaseCodes', package = "TCGAutils")
 colnames(diseaseCodes) <- c("study", "available", "subtype_data", "study_name")
-diseaseCodes <- diseaseCodes[(diseaseCodes$available != "No" & diseaseCodes$study %in% c("ACC", "BLCA")), ]
+diseaseCodes <- diseaseCodes[(diseaseCodes$available != "No"), ]
 
 filenames <- download(out_dir, diseaseCodes$study)
 
